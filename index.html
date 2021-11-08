@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
@@ -8,21 +8,94 @@
 	<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
-	
-    <body class="bg-gray-300">
 
+    <body class="bg-fixed bg-center bg-cover" style="background-image: url(https://img2.akspic.ru/originals/3/5/5/2/22553-gornyj_hrebet-gornyj_relef-gora-pejzazhi_gor-oblako-3840x2160.jpg)">
+
+      <div id="app">
+        
       <header class="bg-gray-900 body-font">
-        <div class="container mx-auto flex flex-grow h-16 p-4 items-center">
-          <a class="flex font-medium text-gray-900">
-            <span class="text-white ml-5 text-xl">CryptoMAN</span>
+        <div class="container mx-auto max-w-4xl flex flex-grow h-16 items-center">
+          <a class="flex font-medium">
+            <span class="text-white text-xl">CryptoMAN</span>
           </a>
           <nav class="md:ml-auto flex items-center text-base justify-center">
             <a class="mr-5 text-white">Encryption</a>
-            <a class="mr-5 text-white">Decryption</a>
+            <a class="text-white">Decryption</a>
           </nav>
         </div>
       </header>
 
-    </body>
-	
+      <div class="flex justify-center flex-col items-center">
+        <div class="flex items-center rounded-t-lg shadow-2xl max-w-4xl mt-14 w-full h-16 bg-gray-900 text-white">
+          <div class="ml-4">Result</div>
+        </div>
+        <hr>
+        <div class="rounded-b-lg shadow-2xl max-w-4xl w-full h-72 bg-gray-900">
+          <textarea v-model="massage" type="text" class="placeholder-gray-500 rounded h-6 ml-6 mt-4" placeholder="Please enter your text..."></textarea>
+        </div>
+      </div>
+
+      <div class="flex justify-center flex-col items-center">
+        <div class="flex items-center rounded-t-lg shadow-2xl max-w-4xl mt-14 w-full h-16 bg-gray-900 text-white">
+          <div class="ml-4">Encryption</div>
+        </div>
+        <hr>
+        <div class="rounded-b-lg shadow-2xl max-w-4xl w-full h-72 bg-gray-900">
+          <textarea v-model="caesar" type="text" class="placeholder-gray-500 rounded h-6 ml-6 mt-4" placeholder="Please enter your text..."></textarea>
+        </div>
+      </div>
+
+    </div>
+
+<script>
+var vm = new Vue({
+  el: '#app',
+  data: {
+    massage: '',
+    alphabet: [
+     'a', 'b', 'c', 'd',
+     'e', 'f', 'g', 'h',
+     'i', 'j', 'k', 'l',
+     'm', 'n', 'o', 'p',
+     'q', 'r', 's', 't',
+     'u', 'v', 'w', 'x',
+     'y', 'z', 'a', 'b',
+     'c',
+     ]
+
+  },
+  computed: {
+    caesar: function () {
+      
+      // делаем из строки массив букв
+      let strArray = this.massage.split('') 
+
+      // тут будут новые буквы
+      var result = []
+
+      // проходим цикл массив букв
+      for (var i = 0; i < strArray.length; i++) {
+
+        // присваеваем переменной abIndex
+        // index из массива букв
+        var abIndex = this.alphabet.indexOf(strArray[i])
+
+        // добовляем к index +3
+        var newIndex = abIndex+3
+
+        // получаемую букву мы добовляем в новый массив букв
+        result.push(this.alphabet[newIndex])
+      }
+
+      // возврощаем массив букв
+      // перезаписываем в буквуa
+      return result.join('')
+    }
+  },
+  created() {
+  }
+})
+</script>
+
+</body>    
 </html>
